@@ -1,0 +1,49 @@
+type Customer @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  customerOwnerId: String!
+  first_name: String!
+  last_name: String!
+  phone: String!
+  address: Address
+}
+
+type Address @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  addressOwnerId: String!
+  address_one: String!
+  address_two: String!
+  city: String!
+  state: String!
+  zip: String!
+}
+
+type Products @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  ProductOwnerId: String!
+  picture: String!
+  title: String!
+  filter: String!
+  pendant: String!
+}
+
+type Orders @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  coupon: Boolean!
+  couponCode: String
+  orderOwnerId: String!
+  items: [Item] 
+  shippingAddress: Address!
+  couponReduction: Float!
+  shippingPrice: Float!
+  tax: Float!
+  subTotal: Float!
+  total: Float!
+}
+
+type Item @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  itemOwnerId: String!
+  productId: String!
+  count: Int!
+  price: Float!
+}
