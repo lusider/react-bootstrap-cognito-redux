@@ -2,28 +2,38 @@ import { Auth, Hub } from 'aws-amplify'
 
 
 export const getUserProfile = () =>
-    Auth.currentUserInfo()
+    Auth.currentAuthenticatedUser()
     .then(userData => {
-        const user = userData.user.map((doc) => ({
-            userId: doc.attributes.sub,
-            username: doc.username,
-            profile: doc.profile
-        }))
-        return user
+        return userData
     })
+    // export const getUserProfile = uid =>
+    // db.collection('profiles')
+    //   .doc(uid)
+    //   .get()
+    //   .then(snapshot => ({uid, ...snapshot.data()}))
 
 
-
-export const onAuthStateChanged = () => Hub.listen('auth', (data) => {
+export const onAuthStateChanged = onAuthCallback => Hub.listen('auth', (data) => {
     const { payload } = data;
-    // this.onAuthEvent(payload);
-    // const user = payload.data.map((doc) => ({
-    //     userId: doc.attributes.sub,
-    //     username: doc.username,
-    //     profile: doc.profile
-    // }))
-    console.log(payload)         
-    return payload
+    switch (payload.event) {
+        case 'signOut':
+            console.log('data from event: ', data)
+            break;
+        case 'signIn':
+            console.log('data from event:', data)      
+            break
+        case 'signUp':
+            console.log('data from event:', data)
+            break;
+        case 'confirmSignUp':
+            console.log('data from event:', data)
+            break;
+        default:
+            console.log('data from event:', data)
+          break;
+    }
+    console.log(payload.event)
+    return onAuthCallback
 })
 
 
@@ -31,13 +41,14 @@ export const logout = () => Auth.signOut()
 
 
 export const login = async loginFormData => {
+
+    const { username, password } = loginFormData
     try {
-      await Auth.login({...loginFormData})
-          .then((user) => {
-              return ({...loginFormData})
-          })
-    } catch(error) {
-      return Promise.reject(error.message)
+        const user = await Auth.signIn(username, password);
+        return user
+        
+    } catch (error) {
+        console.log('error signing in', error);
     }
   }
 
@@ -51,3 +62,15 @@ export const login = async loginFormData => {
       return Promise.reject(error.message)
     }
   }
+
+  export const register = async registerFormData => {
+    const { username, email, password } = registerFormData
+    try {
+    await Auth.signUp({ username, password, attributes: { email }})
+        .then((user) => {
+            return ({...registerFormData})
+        })
+    } catch(error) {
+        return Promise.reject(error.message)
+    }
+}

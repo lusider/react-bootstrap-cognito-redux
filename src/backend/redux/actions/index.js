@@ -7,7 +7,7 @@ import {
     RESET_AUTH_STATE,
     } from '../types'
   import * as auth from '../../auth'
-  import { Auth } from 'aws-amplify'
+
 //   import * as api from '../../api'
 
 // export const fetchProducts = () => dispatch => 
@@ -46,9 +46,8 @@ import {
 
 
 
-export const register = registerFormData => Auth.register({...registerFormData})
-export const login = loginFormData => auth.login({...loginFormData})
-
+export const register = ({ username, password, email }) => auth.register({ username, password, email })
+export const login = ({ username, password }) => auth.login({ username, password })
 export const logout = () => dispatch => 
   auth.logout()
   .then(_ => dispatch({user: null, type: RESET_AUTH_STATE}))
@@ -57,15 +56,12 @@ export const logout = () => dispatch =>
 export const onAuthStateChanged = (onAuthCallback) => auth.onAuthStateChanged(onAuthCallback)
 
 export const storeAuthUser = authUser => dispatch => {
-    if (authUser) {
-      return auth
+    return (
+      auth
         .getUserProfile()
         .then(currentAuthenticatedUser => dispatch({user: currentAuthenticatedUser, type: SET_AUTH_USER}))
-    } else {
-        return dispatch({user: null, type: SET_AUTH_USER})
-    }
-  }
+    )}
 
 export const resetAuthState = () => ({type: RESET_AUTH_STATE})
 
-export const c = () => ({type: RESET_AUTH_STATE})
+export const confirm = confirmFormData => auth.confirm(...confirmFormData)

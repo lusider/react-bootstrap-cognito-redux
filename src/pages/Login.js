@@ -10,20 +10,22 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
 
-const initialFormState = { userName: '', password: ''
+const initialFormState = { username: '', password: ''
 }
 
-const Login = props => {
+const Login = () => {
     const [ redirect, setRedirect ] = useState(false)
     const [formState, updateFormState] = useState(initialFormState)
     const { addToast } = useToasts()
     function onChange(e) {
         e.persist()
+        console.log(formState)
         updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }))
     }
 
-    const onLogin = (formState) => {
-		login(formState)
+    const onLogin = () => {
+        console.log(formState)
+        login(formState)
 			.then(
 				_ => setRedirect(true),
 				errorMessage => addToast(errorMessage, { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
@@ -38,7 +40,7 @@ const Login = props => {
                 <Form>        
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control onChange={onChange} type="email" placeholder="Enter email" />
+                        <Form.Control name="username" onChange={onChange} type="email" placeholder="Enter email" />
                         <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                         </Form.Text>
@@ -46,7 +48,7 @@ const Login = props => {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control onChange={onChange} type="password" placeholder="Password" />
+                        <Form.Control name="password" onChange={onChange} type="password" placeholder="Password" />
                     </Form.Group>
 
                     <Button onClick={onLogin} variant="dark" type="submit">

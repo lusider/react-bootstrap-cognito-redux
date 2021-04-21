@@ -17,6 +17,7 @@ class App extends React.Component {
 			this.unsubscribeAuth = onAuthStateChanged(authUser => {
 				store.dispatch(resetAuthState())
 				store.dispatch(storeAuthUser(authUser))
+				console.log(authUser)
 			})
 		})
 	}

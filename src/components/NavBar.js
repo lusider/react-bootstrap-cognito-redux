@@ -5,10 +5,9 @@ import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const NavBar = props => {
-    const { user, isAuth } = props.auth
+    const { isAuthResolved } = props.auth
     const { logout } = props
   	
-    console.log(props.auth)
 
     return (
         <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -27,7 +26,7 @@ const NavBar = props => {
                 </NavDropdown>
                 </Nav>
                 <Nav>
-                { !isAuth &&
+                { !isAuthResolved &&
                     <>
                         <Nav.Link href="/login">Login</Nav.Link>
                         <Nav.Link href="/register">Sign Up</Nav.Link>
