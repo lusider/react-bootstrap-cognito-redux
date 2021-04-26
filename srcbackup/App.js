@@ -13,10 +13,10 @@ class App extends React.Component {
 
 	componentDidMount() {
 
-		onAuthStateChanged(authUser => {
-			this.unsubscribeAuth = onAuthStateChanged(authUser => {
+		onAuthStateChanged(() => {
+			this.unsubscribeAuth = onAuthStateChanged(() => {
 				store.dispatch(resetAuthState())
-				store.dispatch(storeAuthUser(authUser))
+				store.dispatch(storeAuthUser())
 			})
 		})
 	}

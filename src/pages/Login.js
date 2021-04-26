@@ -13,25 +13,24 @@ import Row from 'react-bootstrap/Row'
 const initialFormState = { username: '', password: ''
 }
 
-const Login = () => {
+const Login = ({dispatch, user}) => {
     const [ redirect, setRedirect ] = useState(false)
     const [formState, updateFormState] = useState(initialFormState)
     const { addToast } = useToasts()
     function onChange(e) {
         e.persist()
-        console.log(formState)
         updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }))
     }
-
+    React.useEffect(()=>{
+        if(user.isAuthResolved){
+            setRedirect(true);
+        }
+    }, [user])
     const onLogin = () => {
         console.log(formState)
-        login(formState)
-			.then(
-				_ => setRedirect(true),
-				errorMessage => addToast(errorMessage, { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
-			)
+        dispatch(login(formState))
 		}
-
+        
     if (redirect) { return <Redirect to="/" /> }
     return (
         <Row style={{paddingTop: '80px'}}>
@@ -51,7 +50,7 @@ const Login = () => {
                         <Form.Control name="password" onChange={onChange} type="password" placeholder="Password" />
                     </Form.Group>
 
-                    <Button onClick={onLogin} variant="dark" type="submit">
+                    <Button onClick={onLogin} variant="dark">
                         Submit
                     </Button>
                 </Form>
@@ -61,4 +60,10 @@ const Login = () => {
     )
 }
 
-export default onlyGuests(connect()(Login));
+const mapStateToProps = () => state => {
+    return {
+        user: state.auth
+    };
+};
+
+export default onlyGuests(connect(mapStateToProps)(Login));

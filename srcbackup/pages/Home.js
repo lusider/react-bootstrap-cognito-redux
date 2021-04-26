@@ -1,11 +1,12 @@
 import React from 'react'
 
-function Profile() {
+function Home() {
+
     return (
         <div>
-            Hello
+            <h1>Hello World!</h1>
         </div>
     )
 }
 
-export default Profile
+export default Home

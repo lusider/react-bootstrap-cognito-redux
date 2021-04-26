@@ -10,18 +10,19 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
 
-const initialFormState = { username: '', confirmcode: ''}
+const initialFormState = { userName: '', password: ''
+}
 
 const ConfirmSignUp = props => {
     const [ redirect, setRedirect ] = useState(false)
     const [formState, updateFormState] = useState(initialFormState)
     const { addToast } = useToasts()
     function onChange(e) {
-        e.persist();
-        updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }));
+        e.persist()
+        updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }))
     }
 
-    const onConfirm = () => {
+    const onConfirm = (formState) => {
 		confirm(formState)
 			.then(
 				_ => setRedirect(true),
@@ -37,7 +38,7 @@ const ConfirmSignUp = props => {
                 <Form>        
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control onChange={onChange} name="username" type="email" placeholder="Enter email" />
+                        <Form.Control onChange={onChange} type="email" placeholder="Enter email" />
                         <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                         </Form.Text>
@@ -45,10 +46,10 @@ const ConfirmSignUp = props => {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Confirmation Code</Form.Label>
-                        <Form.Control onChange={onChange} name="confirmcode" type="text" placeholder="Confirmation Code" />
+                        <Form.Control onChange={onChange} type="text" placeholder="Confirmation Code" />
                     </Form.Group>
 
-                    <Button onClick={onConfirm} variant="dark">
+                    <Button onClick={onConfirm} variant="dark" type="submit">
                         Submit
                     </Button>
                 </Form>

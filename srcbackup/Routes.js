@@ -5,7 +5,7 @@ import ProfilePage from './pages/Profile'
 import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
 import ConfirmPage from './pages/ConfirmSignUp'
-import UserDetails from './pages/UserDetails'
+
 
 const Routes = () => {
 	return (
@@ -24,10 +24,7 @@ const Routes = () => {
 		    </Route>
 		    <Route path="/profile">
 			  <ProfilePage />
-			</Route>
-			<Route path="/user-details">
-			  <UserDetails />
-			</Route>			
+			</Route>		
 		</Switch>
 	)
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 import onlyGuests from '../components/hoc/onlyGuests'
 import { Redirect } from 'react-router-dom'
 import { register } from '../backend/redux/actions'
@@ -8,7 +7,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { Auth } from 'aws-amplify'
+
 
 
 const initialFormState = { email: '', password: '', username: ''
@@ -16,21 +15,21 @@ const initialFormState = { email: '', password: '', username: ''
 
 const Register = () => {
 
-    const [ redirect, setRedirect ] = useState(false)
+    const [ redirect, setRedirect ] = useState(false) 
     const [formState, updateFormState] = useState(initialFormState)
     const { addToast } = useToasts()
     function onChange(e) {
         e.persist()
-        console.log(formState)
         updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }))
     }
 
     const onRegister = () => {
         console.log(formState)
-        const { username, password, email} = formState
-        Auth.signUp({ username, password, attributes: { email }})
+
+        register(formState)
 			.then(
 				_ => setRedirect(true),
+                response => console.log(response),
 				errorMessage => addToast(errorMessage, { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
 			)
 		}
@@ -53,7 +52,7 @@ const Register = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control onChange={onChange} name="password" type="password" placeholder="Password" />
                     </Form.Group>
-                    <Button onClick={onRegister} variant="dark" type="submit">
+                    <Button onClick={onRegister} variant="dark">
                         Submit
                     </Button>
                 </Form>
@@ -63,4 +62,4 @@ const Register = () => {
     )
 }
 
-export default onlyGuests(connect()(Register))
+export default onlyGuests(Register)

@@ -3,7 +3,6 @@ import {
     // FETCH_POSTS_SUCCESS, 
     // FETCH_POST_SUCCESS,
     // REQUEST_POST,
-    SET_USER_ATTRIBUTES,
     SET_AUTH_USER,
     RESET_AUTH_STATE,
     } from '../types'
@@ -47,23 +46,9 @@ import {
 
 
 
-export const register = ({ username, password, email }) => auth.register({ username, password, email })
-export const storeAuthUser = authUser => dispatch => {
-  console.log("stor eAuthUser")
-  return (
-    auth
-      .getUserProfile()
-      .then(currentAuthenticatedUser =>{
-        console.log("set user info in actions");
-        dispatch({user: authUser, type: SET_AUTH_USER})
-      } )
-  )}
-
-export const login = ({ username, password }) => dispatch => 
-auth.login({ username, password }).then(res => dispatch({user: res, type: SET_AUTH_USER}));
-
-export const confirm = ({ username, confirmcode }) => auth.confirm({ username, confirmcode });
-
+export const register = registerFormData => auth.register(registerFormData)
+export const login = ({ username, password }) => auth.login({ username, password })
+    
 export const logout = () => dispatch => 
   auth.logout()
   .then(_ => dispatch({user: null, type: RESET_AUTH_STATE}))
@@ -72,10 +57,13 @@ export const logout = () => dispatch =>
 export const onAuthStateChanged = (onAuthCallback) => auth.onAuthStateChanged(onAuthCallback)
 
 
+export const storeAuthUser = authUser => dispatch => {
+    return (
+      auth
+        .getUserProfile()
+        .then(currentAuthenticatedUser => dispatch({user: currentAuthenticatedUser, type: SET_AUTH_USER}))
+    )}
+
 export const resetAuthState = () => ({type: RESET_AUTH_STATE})
 
-export const setUserAttributes = userAttributes => dispatch => 
-auth.setUserAttributes(userAttributes).then(res => dispatch({user: res, type: SET_USER_ATTRIBUTES}));
-
-
-// export const setUserAttributes = ({ username, password, email }) => auth.setUserAttributes({ username, password, email })
+export const confirm = confirmFormData => auth.confirm(...confirmFormData)
