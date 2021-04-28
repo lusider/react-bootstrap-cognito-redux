@@ -14,6 +14,7 @@ export const getUserProfile = () =>
 
 
 export const onAuthStateChanged = onAuthCallback => Hub.listen('auth', (data) => {
+    window.alert("adfasdfasdfasdf");
     const { payload } = data;
     switch (payload.event) {
         case 'signOut':
@@ -51,6 +52,7 @@ export const login = async loginFormData => {
     } catch (error) {
         console.log(error);
         console.log('error signing in', error);
+        return false;
     }
   }
 
@@ -85,15 +87,23 @@ export const login = async loginFormData => {
 }
 
 export const setUserAttributes = async attributeData => {
-    const { given_name, family_name, phone_number } = attributeData;
+    const { given_name, family_name, phone_number,  address_two, locale, state, postal_code } = attributeData;
     const user = await Auth.currentAuthenticatedUser();
-    console.log(user)
-    console.log(given_name, family_name, phone_number)
-    try {
-        await Auth.updateUserAttributes(user, attributeData).then((attributeData) => {
-            console.log(attributeData);
-            return ({...attributeData})
+    const newData = {
+        given_name,
+        family_name,
+        address: JSON.stringify({
+            street_address: attributeData.address+"\n"+address_two,
+            region:state,
+            locality: locale,
+            postal_code,
         })
+    }
+    console.log("Current user", newData);
+    try {
+        const newUserData = await Auth.updateUserAttributes(user, newData);
+        const userData = await Auth.currentAuthenticatedUser();
+        return userData;
     } catch(error) {
         console.log(error);
         return Promise.reject(error.message)

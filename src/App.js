@@ -12,16 +12,18 @@ const store = initStore()
 class App extends React.Component {
 
 	componentDidMount() {
-
-		onAuthStateChanged(authUser => {
-			this.unsubscribeAuth = onAuthStateChanged(authUser => {
-				store.dispatch(resetAuthState())
-				store.dispatch(storeAuthUser(authUser))
-			})
-		})
+		// onAuthStateChanged(() => {
+		// 	window.alert("adfasdfasdfasdf");
+		// 	this.unsubscribeAuth = onAuthStateChanged(authUser => {
+		// 		store.dispatch(resetAuthState())
+		// 		store.dispatch(storeAuthUser(authUser))
+		// 	})
+		// })
+		store.dispatch(resetAuthState())
+		store.dispatch(storeAuthUser())
 	}
 	componentWillUnmount() {
-		this.unsubscribeAuth()
+		// this.unsubscribeAuth()
 	}
 
 	render () {

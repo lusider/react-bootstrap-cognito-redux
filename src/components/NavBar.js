@@ -35,7 +35,7 @@ const NavBar = props => {
                 
 
                    { isAuthResolved && <>
-                    <NavDropdown style={{marginRight: '40px'}} title={props.auth.user.username} id="collasible-nav-dropdown">
+                    <NavDropdown style={{marginRight: '40px'}} title={props?.auth?.user?.username} id="collasible-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                     <NavDropdown.Item><Link style={{color: '#212529'}} to="/user-details">Details</Link></NavDropdown.Item>
                     <NavDropdown.Item><Link style={{color: '#212529'}} to="/profile">Profile</Link></NavDropdown.Item>

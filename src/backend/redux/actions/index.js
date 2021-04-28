@@ -55,7 +55,7 @@ export const storeAuthUser = authUser => dispatch => {
       .getUserProfile()
       .then(currentAuthenticatedUser =>{
         console.log("set user info in actions");
-        dispatch({user: authUser, type: SET_AUTH_USER})
+        dispatch({user: currentAuthenticatedUser, type: SET_AUTH_USER})
       } )
   )}
 
@@ -75,7 +75,6 @@ export const onAuthStateChanged = (onAuthCallback) => auth.onAuthStateChanged(on
 export const resetAuthState = () => ({type: RESET_AUTH_STATE})
 
 export const setUserAttributes = userAttributes => dispatch => 
-auth.setUserAttributes(userAttributes).then(res => dispatch({user: res, type: SET_USER_ATTRIBUTES}));
-
+auth.setUserAttributes(userAttributes).then(res => dispatch({user: res, type: SET_AUTH_USER}));
 
 // export const setUserAttributes = ({ username, password, email }) => auth.setUserAttributes({ username, password, email })

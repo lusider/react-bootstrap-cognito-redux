@@ -6,7 +6,8 @@ function Home(props) {
     return (
         <div style={styles.root}>
             <h1>This is redux object</h1>
-            <div>{JSON.stringify(props.user)}</div>
+            
+            <div>{JSON.stringify(props?.user)}</div>
         </div>
     )
 }

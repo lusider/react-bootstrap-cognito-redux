@@ -10,7 +10,7 @@ const auth = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case SET_AUTH_USER:
 			console.log("set user info in reducer", action.user);
-			return { user: action.user, isAuthResolved: true }
+			return { user: action.user, isAuthResolved: action.user?true:false }
 		case SET_USER_ATTRIBUTES:
 			return { ...state, user: {...state.user, attributes: action.attributes }}
 		case RESET_AUTH_STATE:

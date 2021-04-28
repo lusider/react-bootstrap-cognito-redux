@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { setUserAttributes } from '../backend/redux/actions'
 import { useToasts } from 'react-toast-notifications'
@@ -6,31 +6,49 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-
+import { connect } from 'react-redux'
+import onlyGuests from '../components/hoc/onlyGuests'
 
 
 const initialFormState = { given_name: '', family_name: '', phone_number: ''
 }
 
-const UserDetails = () => {
-
+const UserDetails = ({dispatch, user}) => {
+    const userAttributes = user?.user?.attributes;
+    const addressData = user?.user?.attributes?.address?JSON.parse(userAttributes.address):[];
+    const addressOne = addressData?.street_address?.split('\n')[0]==='undefined'?"":user?.user?.attributes?.address?addressData?.street_address?.split('\n')[0]:'';
+    const addressTwo = addressData?.street_address?.split('\n')[1]==='undefined'?"":user?.user?.attributes?.address?addressData?.street_address?.split('\n')[1]:'';
     const [ redirect, setRedirect ] = useState(false) 
-    const [formState, updateFormState] = useState(initialFormState)
+    const [formState, updateFormState] = useState();
+
     const { addToast } = useToasts()
     function onChange(e) {
         e.persist()
         updateFormState(() => ({ ...formState, [e.target.name]: e.target.value }))
     }
-
+    useEffect(() => {
+        console.log(addressTwo)
+        updateFormState({
+            given_name:userAttributes?.given_name,
+            family_name:userAttributes?.family_name,
+            address:addressOne?addressOne:'',
+            address_two:addressTwo?addressTwo:'',
+            locale:addressData?.locality,
+            state:addressData?.region,
+            postal_code:addressData?.postal_code,
+        })
+    },[addressTwo, addressOne])
     const onAddDetail = () => {
-        console.log(formState)
+        console.log("formdata", formState)
 
-        setUserAttributes(formState)
-			.then(
-				_ => setRedirect(true),
-                response => console.log(response),
-				errorMessage => addToast(errorMessage, { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
-			)
+        const attributes = setUserAttributes(formState);
+        dispatch(attributes);
+        setRedirect(true);
+			// .then(
+			// 	_ => setRedirect(true),
+            //     response => console.log(response),
+			// 	errorMessage => addToast(errorMessage, { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
+			// )
 		}
 
     if (redirect) { return <Redirect to="/profile" /> }
@@ -42,37 +60,37 @@ const UserDetails = () => {
             <Form.Row>
                 <Col>
                 <Form.Label>First Name</Form.Label>
-                <Form.Control placeholder="First name" onChange={onChange} name="given_name" />
+                <Form.Control value={formState?.given_name} disabled={userAttributes?.given_name?true:false} onChange={onChange} name="given_name" />
                 </Col>
                 <Col>
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control placeholder="Last name" onChange={onChange} name="family_name" />
+                <Form.Control value={formState?.family_name} disabled={userAttributes?.family_name?true:false} onChange={onChange} name="family_name" />
                 </Col>
             </Form.Row>
            
-            <Form.Group controlId="formGridPhone">
+            {/* <Form.Group controlId="formGridPhone">
                 <Form.Label>Phone</Form.Label>
-                <Form.Control onChange={onChange} name="phone_number" placeholder="888-555-1234" />
-            </Form.Group>
+                <Form.Control onChange={onChange} name="phone_number" value={userAttributes?.phone_number} />
+            </Form.Group> */}
             <Form.Group controlId="formGridAddress1">
                 <Form.Label>Address</Form.Label>
-                <Form.Control onChange={onChange} name="address" placeholder="1234 Main St" />
+                <Form.Control onChange={onChange} name="address" value={formState?.address} disabled={addressOne!==''?true:false} />
             </Form.Group>
 
             <Form.Group controlId="formGridAddress2">
                 <Form.Label>Address 2</Form.Label>
-                <Form.Control onChange={onChange} name="address_two" placeholder="Apartment, studio, or floor" />
+                <Form.Control onChange={onChange} name="address_two" value={formState?.address_two} disabled={addressTwo!==''?true:false} />
             </Form.Group>
             
             <Form.Row>
                 <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>City</Form.Label>
-                <Form.Control onChange={onChange} name="locale" />
+                <Form.Control onChange={onChange} name="locale" value={formState?.locale} disabled={addressData?.locality?true:false}  />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>State</Form.Label>
-                <Form.Control onChange={onChange} name="state" as="select" defaultValue="Choose...">
+                <Form.Control onChange={onChange} name="state" as="select" value={formState?.state} disabled={addressData?.region?true:false} >
                     <option>Choose...</option>
                     <option>AL</option>
                     <option>AK</option>
@@ -132,7 +150,7 @@ const UserDetails = () => {
 
                 <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Zip</Form.Label>
-                <Form.Control onChange={onChange} name="postal_code" />
+                <Form.Control onChange={onChange} name="postal_code" value={formState?.postal_code} disabled={addressData?.postal_code?true:false}  />
                 </Form.Group>
             </Form.Row>
 
@@ -140,7 +158,7 @@ const UserDetails = () => {
                 <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
 
-            <Button onClick={onAddDetail} variant="primary" type="submit">
+            <Button onClick={onAddDetail} variant="primary">
                 Submit
             </Button>
         </Form>
@@ -149,5 +167,10 @@ const UserDetails = () => {
         </Row>
     )
 }
+const mapStateToProps = () => state => {
+    return {
+        user: state.auth
+    };
+};
 
-export default UserDetails;
+export default onlyGuests(connect(mapStateToProps)(UserDetails));

@@ -26,15 +26,18 @@ const Login = ({dispatch, user}) => {
             setRedirect(true);
         }
     }, [user])
-    const onLogin = () => {
+    const onLogin = async() => {
         console.log(formState)
-        dispatch(login(formState))
-		}
+        const userData = await login(formState);
+        console.log('ASDFADF', userData)
+        dispatch(userData)
+    }
         
     if (redirect) { return <Redirect to="/" /> }
     return (
         <Row style={{paddingTop: '80px'}}>
             <Col />
+            
             <Col className="pt-5">
                 <Form>        
                     <Form.Group controlId="formBasicEmail">

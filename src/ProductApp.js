@@ -5,12 +5,6 @@ import Spinner from './components/Spinner'
 import Routes from './Routes'
 import { logout } from './backend/redux/actions'
 
-
-
-
-
-
-
 class ProductApp extends React.Component {
 	
 	handleLogout = () => this.props.dispatch(logout())
