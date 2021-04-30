@@ -87,7 +87,7 @@ export const login = async loginFormData => {
 }
 
 export const setUserAttributes = async attributeData => {
-    const { given_name, family_name, phone_number,  address_two, locale, state, postal_code } = attributeData;
+    const { given_name, family_name, address_two, locale, state, postal_code } = attributeData;
     const user = await Auth.currentAuthenticatedUser();
     const newData = {
         given_name,

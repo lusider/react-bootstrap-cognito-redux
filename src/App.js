@@ -3,7 +3,7 @@ import ProductApp from './ProductApp'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications'
 import { Provider } from 'react-redux'
-import { onAuthStateChanged, storeAuthUser, resetAuthState } from './backend/redux/actions'
+import { storeAuthUser, resetAuthState } from './backend/redux/actions'
 import initStore from './backend/redux/store'
 
 const store = initStore()

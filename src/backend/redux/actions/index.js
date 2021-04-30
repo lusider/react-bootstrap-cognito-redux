@@ -3,7 +3,6 @@ import {
     // FETCH_POSTS_SUCCESS, 
     // FETCH_POST_SUCCESS,
     // REQUEST_POST,
-    SET_USER_ATTRIBUTES,
     SET_AUTH_USER,
     RESET_AUTH_STATE,
     } from '../types'

@@ -10,8 +10,8 @@ import { connect } from 'react-redux'
 import onlyGuests from '../components/hoc/onlyGuests'
 
 
-const initialFormState = { given_name: '', family_name: '', phone_number: ''
-}
+// const initialFormState = { given_name: '', family_name: '', phone_number: ''
+// }
 
 const UserDetails = ({dispatch, user}) => {
     const userAttributes = user?.user?.attributes;
