@@ -1,139 +1,14 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateCustomer = /* GraphQL */ `
-  subscription OnCreateCustomer($owner: String!) {
-    onCreateCustomer(owner: $owner) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateCustomer = /* GraphQL */ `
-  subscription OnUpdateCustomer($owner: String!) {
-    onUpdateCustomer(owner: $owner) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteCustomer = /* GraphQL */ `
-  subscription OnDeleteCustomer($owner: String!) {
-    onDeleteCustomer(owner: $owner) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateAddress = /* GraphQL */ `
-  subscription OnCreateAddress($owner: String!) {
-    onCreateAddress(owner: $owner) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateAddress = /* GraphQL */ `
-  subscription OnUpdateAddress($owner: String!) {
-    onUpdateAddress(owner: $owner) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteAddress = /* GraphQL */ `
-  subscription OnDeleteAddress($owner: String!) {
-    onDeleteAddress(owner: $owner) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateProducts = /* GraphQL */ `
-  subscription OnCreateProducts($owner: String!) {
-    onCreateProducts(owner: $owner) {
+export const onCreateProduct = /* GraphQL */ `
+  subscription OnCreateProduct($owner: String!) {
+    onCreateProduct(owner: $owner) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -142,13 +17,14 @@ export const onCreateProducts = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateProducts = /* GraphQL */ `
-  subscription OnUpdateProducts($owner: String!) {
-    onUpdateProducts(owner: $owner) {
+export const onUpdateProduct = /* GraphQL */ `
+  subscription OnUpdateProduct($owner: String!) {
+    onUpdateProduct(owner: $owner) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -157,13 +33,14 @@ export const onUpdateProducts = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteProducts = /* GraphQL */ `
-  subscription OnDeleteProducts($owner: String!) {
-    onDeleteProducts(owner: $owner) {
+export const onDeleteProduct = /* GraphQL */ `
+  subscription OnDeleteProduct($owner: String!) {
+    onDeleteProduct(owner: $owner) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -172,9 +49,9 @@ export const onDeleteProducts = /* GraphQL */ `
     }
   }
 `;
-export const onCreateOrders = /* GraphQL */ `
-  subscription OnCreateOrders($owner: String!) {
-    onCreateOrders(owner: $owner) {
+export const onCreateOrder = /* GraphQL */ `
+  subscription OnCreateOrder($owner: String!) {
+    onCreateOrder(owner: $owner) {
       id
       coupon
       couponCode
@@ -185,6 +62,7 @@ export const onCreateOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -192,11 +70,12 @@ export const onCreateOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -212,9 +91,9 @@ export const onCreateOrders = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateOrders = /* GraphQL */ `
-  subscription OnUpdateOrders($owner: String!) {
-    onUpdateOrders(owner: $owner) {
+export const onUpdateOrder = /* GraphQL */ `
+  subscription OnUpdateOrder($owner: String!) {
+    onUpdateOrder(owner: $owner) {
       id
       coupon
       couponCode
@@ -225,6 +104,7 @@ export const onUpdateOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -232,11 +112,12 @@ export const onUpdateOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -252,9 +133,9 @@ export const onUpdateOrders = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteOrders = /* GraphQL */ `
-  subscription OnDeleteOrders($owner: String!) {
-    onDeleteOrders(owner: $owner) {
+export const onDeleteOrder = /* GraphQL */ `
+  subscription OnDeleteOrder($owner: String!) {
+    onDeleteOrder(owner: $owner) {
       id
       coupon
       couponCode
@@ -265,6 +146,7 @@ export const onDeleteOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -272,11 +154,12 @@ export const onDeleteOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -300,6 +183,7 @@ export const onCreateItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
       createdAt
       updatedAt
       owner
@@ -314,6 +198,7 @@ export const onUpdateItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
       createdAt
       updatedAt
       owner
@@ -328,6 +213,58 @@ export const onDeleteItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateAddress = /* GraphQL */ `
+  subscription OnCreateAddress($owner: String!) {
+    onCreateAddress(owner: $owner) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateAddress = /* GraphQL */ `
+  subscription OnUpdateAddress($owner: String!) {
+    onUpdateAddress(owner: $owner) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteAddress = /* GraphQL */ `
+  subscription OnDeleteAddress($owner: String!) {
+    onDeleteAddress(owner: $owner) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
       createdAt
       updatedAt
       owner

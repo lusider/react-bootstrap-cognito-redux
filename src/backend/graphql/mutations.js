@@ -1,160 +1,17 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createCustomer = /* GraphQL */ `
-  mutation CreateCustomer(
-    $input: CreateCustomerInput!
-    $condition: ModelCustomerConditionInput
+export const createProduct = /* GraphQL */ `
+  mutation CreateProduct(
+    $input: CreateProductInput!
+    $condition: ModelProductConditionInput
   ) {
-    createCustomer(input: $input, condition: $condition) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateCustomer = /* GraphQL */ `
-  mutation UpdateCustomer(
-    $input: UpdateCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    updateCustomer(input: $input, condition: $condition) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteCustomer = /* GraphQL */ `
-  mutation DeleteCustomer(
-    $input: DeleteCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    deleteCustomer(input: $input, condition: $condition) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createAddress = /* GraphQL */ `
-  mutation CreateAddress(
-    $input: CreateAddressInput!
-    $condition: ModelAddressConditionInput
-  ) {
-    createAddress(input: $input, condition: $condition) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateAddress = /* GraphQL */ `
-  mutation UpdateAddress(
-    $input: UpdateAddressInput!
-    $condition: ModelAddressConditionInput
-  ) {
-    updateAddress(input: $input, condition: $condition) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteAddress = /* GraphQL */ `
-  mutation DeleteAddress(
-    $input: DeleteAddressInput!
-    $condition: ModelAddressConditionInput
-  ) {
-    deleteAddress(input: $input, condition: $condition) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const createProducts = /* GraphQL */ `
-  mutation CreateProducts(
-    $input: CreateProductsInput!
-    $condition: ModelProductsConditionInput
-  ) {
-    createProducts(input: $input, condition: $condition) {
+    createProduct(input: $input, condition: $condition) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -163,16 +20,17 @@ export const createProducts = /* GraphQL */ `
     }
   }
 `;
-export const updateProducts = /* GraphQL */ `
-  mutation UpdateProducts(
-    $input: UpdateProductsInput!
-    $condition: ModelProductsConditionInput
+export const updateProduct = /* GraphQL */ `
+  mutation UpdateProduct(
+    $input: UpdateProductInput!
+    $condition: ModelProductConditionInput
   ) {
-    updateProducts(input: $input, condition: $condition) {
+    updateProduct(input: $input, condition: $condition) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -181,16 +39,17 @@ export const updateProducts = /* GraphQL */ `
     }
   }
 `;
-export const deleteProducts = /* GraphQL */ `
-  mutation DeleteProducts(
-    $input: DeleteProductsInput!
-    $condition: ModelProductsConditionInput
+export const deleteProduct = /* GraphQL */ `
+  mutation DeleteProduct(
+    $input: DeleteProductInput!
+    $condition: ModelProductConditionInput
   ) {
-    deleteProducts(input: $input, condition: $condition) {
+    deleteProduct(input: $input, condition: $condition) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -199,12 +58,12 @@ export const deleteProducts = /* GraphQL */ `
     }
   }
 `;
-export const createOrders = /* GraphQL */ `
-  mutation CreateOrders(
-    $input: CreateOrdersInput!
-    $condition: ModelOrdersConditionInput
+export const createOrder = /* GraphQL */ `
+  mutation CreateOrder(
+    $input: CreateOrderInput!
+    $condition: ModelOrderConditionInput
   ) {
-    createOrders(input: $input, condition: $condition) {
+    createOrder(input: $input, condition: $condition) {
       id
       coupon
       couponCode
@@ -215,6 +74,7 @@ export const createOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -222,11 +82,12 @@ export const createOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -242,12 +103,12 @@ export const createOrders = /* GraphQL */ `
     }
   }
 `;
-export const updateOrders = /* GraphQL */ `
-  mutation UpdateOrders(
-    $input: UpdateOrdersInput!
-    $condition: ModelOrdersConditionInput
+export const updateOrder = /* GraphQL */ `
+  mutation UpdateOrder(
+    $input: UpdateOrderInput!
+    $condition: ModelOrderConditionInput
   ) {
-    updateOrders(input: $input, condition: $condition) {
+    updateOrder(input: $input, condition: $condition) {
       id
       coupon
       couponCode
@@ -258,6 +119,7 @@ export const updateOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -265,11 +127,12 @@ export const updateOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -285,12 +148,12 @@ export const updateOrders = /* GraphQL */ `
     }
   }
 `;
-export const deleteOrders = /* GraphQL */ `
-  mutation DeleteOrders(
-    $input: DeleteOrdersInput!
-    $condition: ModelOrdersConditionInput
+export const deleteOrder = /* GraphQL */ `
+  mutation DeleteOrder(
+    $input: DeleteOrderInput!
+    $condition: ModelOrderConditionInput
   ) {
-    deleteOrders(input: $input, condition: $condition) {
+    deleteOrder(input: $input, condition: $condition) {
       id
       coupon
       couponCode
@@ -301,6 +164,7 @@ export const deleteOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -308,11 +172,12 @@ export const deleteOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -339,6 +204,7 @@ export const createItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
       createdAt
       updatedAt
       owner
@@ -356,6 +222,7 @@ export const updateItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
       createdAt
       updatedAt
       owner
@@ -373,6 +240,67 @@ export const deleteItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createAddress = /* GraphQL */ `
+  mutation CreateAddress(
+    $input: CreateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    createAddress(input: $input, condition: $condition) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateAddress = /* GraphQL */ `
+  mutation UpdateAddress(
+    $input: UpdateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    updateAddress(input: $input, condition: $condition) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteAddress = /* GraphQL */ `
+  mutation DeleteAddress(
+    $input: DeleteAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    deleteAddress(input: $input, condition: $condition) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
       createdAt
       updatedAt
       owner

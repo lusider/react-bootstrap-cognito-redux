@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 function Profile(props) {
     
     const { given_name, family_name, address } = props.auth.user.attributes
+    
 
     return (
         <Modal.Dialog style={{marginTop: '100px'}}>
@@ -16,7 +17,8 @@ function Profile(props) {
         <Modal.Body>
             <p>Name: {given_name} {family_name}</p>
             <div> 
-              <p>{address}</p>  
+                {address['street_address']}
+                
             </div>
             
         </Modal.Body>

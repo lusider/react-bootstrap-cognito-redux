@@ -1,111 +1,14 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getCustomer = /* GraphQL */ `
-  query GetCustomer($id: ID!) {
-    getCustomer(id: $id) {
-      id
-      customerOwnerId
-      first_name
-      last_name
-      phone
-      address {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listCustomers = /* GraphQL */ `
-  query ListCustomers(
-    $filter: ModelCustomerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        customerOwnerId
-        first_name
-        last_name
-        phone
-        address {
-          id
-          addressOwnerId
-          address_one
-          address_two
-          city
-          state
-          zip
-          createdAt
-          updatedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getAddress = /* GraphQL */ `
-  query GetAddress($id: ID!) {
-    getAddress(id: $id) {
-      id
-      addressOwnerId
-      address_one
-      address_two
-      city
-      state
-      zip
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listAddresss = /* GraphQL */ `
-  query ListAddresss(
-    $filter: ModelAddressFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAddresss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        addressOwnerId
-        address_one
-        address_two
-        city
-        state
-        zip
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const getProducts = /* GraphQL */ `
-  query GetProducts($id: ID!) {
-    getProducts(id: $id) {
+export const getProduct = /* GraphQL */ `
+  query GetProduct($id: ID!) {
+    getProduct(id: $id) {
       id
       ProductOwnerId
       picture
       title
+      description
       filter
       pendant
       createdAt
@@ -114,18 +17,19 @@ export const getProducts = /* GraphQL */ `
     }
   }
 `;
-export const listProductss = /* GraphQL */ `
-  query ListProductss(
-    $filter: ModelProductsFilterInput
+export const listProducts = /* GraphQL */ `
+  query ListProducts(
+    $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listProductss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         ProductOwnerId
         picture
         title
+        description
         filter
         pendant
         createdAt
@@ -136,9 +40,9 @@ export const listProductss = /* GraphQL */ `
     }
   }
 `;
-export const getOrders = /* GraphQL */ `
-  query GetOrders($id: ID!) {
-    getOrders(id: $id) {
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
       id
       coupon
       couponCode
@@ -149,6 +53,7 @@ export const getOrders = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
         createdAt
         updatedAt
         owner
@@ -156,11 +61,12 @@ export const getOrders = /* GraphQL */ `
       shippingAddress {
         id
         addressOwnerId
-        address_one
-        address_two
         city
+        country
+        line1
+        line2
+        postal_code
         state
-        zip
         createdAt
         updatedAt
         owner
@@ -176,13 +82,13 @@ export const getOrders = /* GraphQL */ `
     }
   }
 `;
-export const listOrderss = /* GraphQL */ `
-  query ListOrderss(
-    $filter: ModelOrdersFilterInput
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $filter: ModelOrderFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listOrderss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         coupon
@@ -194,6 +100,7 @@ export const listOrderss = /* GraphQL */ `
           productId
           count
           price
+          discountedPrice
           createdAt
           updatedAt
           owner
@@ -201,11 +108,12 @@ export const listOrderss = /* GraphQL */ `
         shippingAddress {
           id
           addressOwnerId
-          address_one
-          address_two
           city
+          country
+          line1
+          line2
+          postal_code
           state
-          zip
           createdAt
           updatedAt
           owner
@@ -231,6 +139,7 @@ export const getItem = /* GraphQL */ `
       productId
       count
       price
+      discountedPrice
       createdAt
       updatedAt
       owner
@@ -250,6 +159,48 @@ export const listItems = /* GraphQL */ `
         productId
         count
         price
+        discountedPrice
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getAddress = /* GraphQL */ `
+  query GetAddress($id: ID!) {
+    getAddress(id: $id) {
+      id
+      addressOwnerId
+      city
+      country
+      line1
+      line2
+      postal_code
+      state
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listAddresss = /* GraphQL */ `
+  query ListAddresss(
+    $filter: ModelAddressFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAddresss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        addressOwnerId
+        city
+        country
+        line1
+        line2
+        postal_code
+        state
         createdAt
         updatedAt
         owner

@@ -12,7 +12,7 @@ const NavBar = props => {
 
     return (
         <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand><Link style={{color: '#fff'}} to="/">Authentication App</Link></Navbar.Brand>
+            <Navbar.Brand><Link style={{color: '#fff'}} to="/">Cosmic Arts</Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">

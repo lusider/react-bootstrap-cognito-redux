@@ -1,43 +1,27 @@
 import { API, graphqlOperation } from 'aws-amplify'
-import { createProducts } from '../../graphql/mutations'
-import { listProductss } from '../../graphql/queries'
-
-// POSTS
+import { createProduct } from '../graphql/mutations'
+import { listProducts, getProduct } from '../graphql/queries'
 
 export const addProduct = newProduct => {
-    return API.graphql(graphqlOperation(createProducts, { newProduct }))
+    return API.graphql(graphqlOperation(createProduct, { newProduct }))
     .then(docRef => docRef.id)
-}
-
-// export const getUserProfile = uid =>
-//     Auth.currentUserInfo()
-//     .then(userData => {
-//         const user = userData.user.attributes.map((doc) => ({
-//             user: doc.sub
-//         }))
-//         return user
-//     }
-
-        // await Auth.currentUserInfo()
-        // .then(user => {
-        //     this.setState({
-        //         userId: user.attributes.sub,
-        //         username: user.username
-        //     })
-        // })
-
-
-export const displayProducts = () => {
-    return API.graphql(graphqlOperation(listProductss))
-    .then(productData => {
-        const products = productData.data.listProductss.items.map((doc) => ({
-            id: doc.id, 
-            filter: doc.filter, 
-            title: doc.title, 
-            pendant: doc.pendant,
-            picture: doc.picture
-        }))
-        // const posts = postData.data.listPosts.items.map(doc => ({...doc.data}))
-        return products	
-    })
-}
+  }
+  
+  export const fetchProductById = productId => 
+      API.graphql(graphqlOperation(getProduct(productId)))
+          .then(snapshot => ({id: snapshot.id, ...snapshot.data()}))
+  
+  export const fetchProducts = () => 
+      API.graphql(graphqlOperation(listProducts))
+          .then(snapshot => {
+              const products = snapshot.docs.map((doc) => ({id: doc.id, ...doc.data()}))
+              return products	
+          })
+  
+  export const fetchUserProducts = userId => 
+   API.graphql(graphqlOperation(listProducts))
+      .then(snapshot => {
+        const products = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+        return products 
+      })
+  
